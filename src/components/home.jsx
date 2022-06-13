@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <div className="row">
-        <AdsTop />
+        {/* <AdsTop /> */}
         <div className="px-4 py-1 my-3 text-center">
           <h1>Welcome to TellMeMyWorth.io!</h1>
           <h6>

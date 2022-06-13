@@ -103,7 +103,7 @@ class Assets extends Component {
       <div>
         {loading === false ? (
           <div className="row">
-            <AdsTop />
+            {/* <AdsTop /> */}
             <div className="px-4 my-1 text-center">
               {totalCount !== 0 ? (
                 <h1>
