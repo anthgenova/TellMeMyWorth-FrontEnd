@@ -1,0 +1,27 @@
+:root {
+  --font-color: #eee;
+  --background-color: #333;
+  --link-color: lightblue;
+}
+
+body {
+  margin: 0;
+  padding: 20px 0 0 0;
+  background:  #ff0090;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.clickable {
+  cursor: pointer
+}
