@@ -16,7 +16,7 @@ class Home extends Component {
       <div className="row">
         {/* <AdsTop /> */}
         <div className="px-4 py-1 my-3 text-center">
-          <h1>Welcome to TellMeMyWorth.io!</h1>
+          <h1>Welcome to TellMeMyWorth!</h1>
           <h6>
             Please consider donating to $TellMeMyWorth to help keep us alive.
           </h6>

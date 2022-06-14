@@ -12,6 +12,7 @@ import { paginate } from "../utils/paginate";
 import { getAssets, getTotalValue } from "../services/walletService";
 import { getProjects } from "../services/projectService";
 import _ from "lodash";
+import { isMobile } from "react-device-detect";
 
 function demoAsyncCall() {
   return new Promise((resolve) => setTimeout(() => resolve(), 3000));
@@ -120,8 +121,20 @@ class Assets extends Component {
                 alive.
               </h6>
             </div>
-            <div className="col">
+            <div className="col order-md-1">
               <AddrSearch history={this.props.history} loading={loading} />
+              {isMobile ? (
+                <>
+                  <th>
+                    <AddrUpdate location={this.props.location.pathname} />
+                  </th>
+                  <th>
+                    <HomeButton history={this.props.history} />
+                  </th>
+                </>
+              ) : (
+                <></>
+              )}
               {totalCount !== 0 ? (
                 <>
                   <AssetsTable
@@ -174,15 +187,19 @@ class Assets extends Component {
                 </>
               )}
             </div>
-            <div className="col-2">
-              <table>
-                <th>
-                  <AddrUpdate location={this.props.location.pathname} />
-                </th>
-                <th>
-                  <HomeButton history={this.props.history} />
-                </th>
-              </table>
+            <div className="col-md-2 order-md-2">
+              {isMobile ? (
+                <></>
+              ) : (
+                <table>
+                  <th>
+                    <AddrUpdate location={this.props.location.pathname} />
+                  </th>
+                  <th>
+                    <HomeButton history={this.props.history} />
+                  </th>
+                </table>
+              )}
               {totalCount !== 0 ? (
                 <ListGroup
                   items={this.state.projects}
