@@ -15,7 +15,7 @@ class AddrUpdate extends Component {
         <button
           onClick={this.doUpdate}
           className="btn btn-primary"
-          style={{ margin: "1.4rem 0rem 0rem 0rem" }}
+          style={{ margin: "0rem 0rem 0rem 0rem" }}
         >
           Update
         </button>

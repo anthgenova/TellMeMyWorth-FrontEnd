@@ -103,7 +103,7 @@ class Assets extends Component {
       // <WalletNew history={this.props.history} loading={loading} />
       <div>
         {loading === false ? (
-          <div className="row">
+          <div className="row justify-content-center">
             {/* <AdsTop /> */}
             <div className="px-4 my-1 text-center">
               {totalCount !== 0 ? (
@@ -113,28 +113,52 @@ class Assets extends Component {
                   ₳!
                 </h1>
               ) : (
-                <h1>First time here?</h1>
+                <h3>First time here?</h3>
               )}
 
               <h6>
                 Please consider donating to $TellMeMyWorth to help keep us
                 alive.
               </h6>
-            </div>
-            <div className="col order-md-1">
-              <AddrSearch history={this.props.history} loading={loading} />
+              <div
+                className="row justify-content-center"
+                style={{ padding: "0rem 0rem 1.5rem 0rem" }}
+              >
+                <div className="col-auto pt-2">
+                  <table className="pt-4">
+                    <th className="px-4">
+                      <AddrUpdate location={this.props.location.pathname} />
+                    </th>
+                    <th className="px-4">
+                      <HomeButton history={this.props.history} />
+                    </th>
+                  </table>
+                </div>
+              </div>
               {isMobile ? (
                 <>
-                  <th>
-                    <AddrUpdate location={this.props.location.pathname} />
-                  </th>
-                  <th>
-                    <HomeButton history={this.props.history} />
-                  </th>
+                  <p>
+                    {this.props.location.pathname
+                      .replace("/", "")
+                      .substring(0, 40)}
+                  </p>
+                  <p>
+                    {this.props.location.pathname
+                      .replace("/", "")
+                      .substring(40)}
+                  </p>
+                  {/* <h7>
+                    {this.props.location.pathname
+                      .replace("/", "")
+                      .substring(10)}
+                  </h7> */}
                 </>
               ) : (
-                <></>
+                <h6>{this.props.location.pathname.replace("/", "")}</h6>
               )}
+            </div>
+            <div className="col order-md-1">
+              {/* <AddrSearch history={this.props.history} loading={loading} /> */}
               {totalCount !== 0 ? (
                 <>
                   <AssetsTable
@@ -153,7 +177,9 @@ class Assets extends Component {
                 <>
                   {" "}
                   <p></p>
-                  <p>It appears that we don't have this address logged.</p>
+                  <p className="pt-5">
+                    It appears that we don't have this address logged.
+                  </p>
                   <p>
                     Follow these steps so you will be able to view your worth:
                   </p>
@@ -168,14 +194,14 @@ class Assets extends Component {
                     {" "}
                     2. We add in the current amount of ADA in your wallet, so if
                     your assets still aren't showing check that your address is
-                    correctly entered. You can check this in the URL. If an
-                    invalid address is showing in the URL, please Search for the
-                    correct wallet then follow step 1.
+                    correctly entered. If an invalid address was entered, please
+                    return home and search for the correct wallet then follow
+                    step 1.
                   </p>
                   <p>
                     {" "}
                     3. Still not working? Message us on Discord so we can help
-                    you figure out how much your worth.{" "}
+                    you figure out how much you're worth.{" "}
                   </p>
                   <p>
                     {" "}
@@ -188,18 +214,6 @@ class Assets extends Component {
               )}
             </div>
             <div className="col-md-2 order-md-2">
-              {isMobile ? (
-                <></>
-              ) : (
-                <table>
-                  <th>
-                    <AddrUpdate location={this.props.location.pathname} />
-                  </th>
-                  <th>
-                    <HomeButton history={this.props.history} />
-                  </th>
-                </table>
-              )}
               {totalCount !== 0 ? (
                 <ListGroup
                   items={this.state.projects}

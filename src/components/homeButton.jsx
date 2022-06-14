@@ -13,7 +13,7 @@ class HomeButton extends Component {
         <button
           onClick={this.goHome}
           className="btn btn-primary"
-          style={{ margin: "1.4rem 0rem 0rem 2.5rem" }}
+          style={{ margin: "0rem 0rem 0rem 0rem" }}
         >
           Home
         </button>
