@@ -219,7 +219,7 @@ class Assets extends Component {
                   items={this.state.projects}
                   selectedItem={this.state.selectedProject}
                   onItemSelect={this.handleProjectSelect}
-                  style={{ marginTop: "5.2rem" }}
+                  style={{ marginTop: "0rem" }}
                 />
               ) : (
                 <></>
