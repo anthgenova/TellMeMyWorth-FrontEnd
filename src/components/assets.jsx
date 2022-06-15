@@ -37,7 +37,7 @@ class Assets extends Component {
     const { data: assets } = await getAssets(this.props.location.pathname);
     this.setState({ assets, projects });
     demoAsyncCall().then(() => this.setState({ loading: false }));
-    console.log("DidMount" + this.state.loading);
+    // console.log("DidMount" + this.state.loading);
   }
 
   // async componentDidMount() {
@@ -52,7 +52,7 @@ class Assets extends Component {
       const { data: assets } = await getAssets(this.props.location.pathname);
       this.setState({ assets, projects });
     }
-    console.log("DidUpdate" + this.state.loading);
+    // console.log("DidUpdate" + this.state.loading);
   }
 
   handlePageChange = (page) => {
