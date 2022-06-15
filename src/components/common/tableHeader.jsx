@@ -14,7 +14,7 @@ class TableHeader extends Component {
 
   renderSortIcon = (column) => {
     const { sortColumn } = this.props;
-    console.log(column.sortable);
+    // console.log(column.sortable);
 
     if (column.path !== sortColumn.path) return null;
     if (sortColumn.order === "asc") return <i className="fa fa-sort-asc"></i>;
@@ -25,23 +25,25 @@ class TableHeader extends Component {
     return (
       <thead>
         <tr>
-          {this.props.columns.map((column) => (
-            <>
-              {column.sortable ? (
-                <th
-                  className="clickable"
-                  key={column.path || column.key}
-                  onClick={() => this.raiseSort(column.path)}
-                >
-                  {column.label} {this.renderSortIcon(column)}
-                </th>
-              ) : (
-                <th className="un-clickable" key={column.path || column.key}>
-                  {column.label}
-                </th>
-              )}
-            </>
-          ))}
+          {React.Children.toArray(
+            this.props.columns.map((column) => (
+              <>
+                {column.sortable ? (
+                  <th
+                    className="clickable"
+                    key={column.path || column.key}
+                    onClick={() => this.raiseSort(column.path)}
+                  >
+                    {column.label} {this.renderSortIcon(column)}
+                  </th>
+                ) : (
+                  <th className="un-clickable" key={column.path || column.key}>
+                    {column.label}
+                  </th>
+                )}
+              </>
+            ))
+          )}
         </tr>
       </thead>
     );

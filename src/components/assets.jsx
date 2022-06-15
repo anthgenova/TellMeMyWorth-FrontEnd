@@ -37,7 +37,12 @@ class Assets extends Component {
     const { data: assets } = await getAssets(this.props.location.pathname);
     this.setState({ assets, projects });
     demoAsyncCall().then(() => this.setState({ loading: false }));
+    console.log("DidMount" + this.state.loading);
   }
+
+  // async componentDidMount() {
+  //   console.log(this.props.location);
+  // }
 
   async componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.addr !== prevProps.match.params.addr) {
@@ -47,6 +52,7 @@ class Assets extends Component {
       const { data: assets } = await getAssets(this.props.location.pathname);
       this.setState({ assets, projects });
     }
+    console.log("DidUpdate" + this.state.loading);
   }
 
   handlePageChange = (page) => {
@@ -126,12 +132,16 @@ class Assets extends Component {
               >
                 <div className="col-auto pt-2">
                   <table className="pt-4">
-                    <th className="px-4">
-                      <AddrUpdate location={this.props.location.pathname} />
-                    </th>
-                    <th className="px-4">
-                      <HomeButton history={this.props.history} />
-                    </th>
+                    <thead>
+                      <tr>
+                        <td className="px-4">
+                          <AddrUpdate location={this.props.location.pathname} />
+                        </td>
+                        <td className="px-4">
+                          <HomeButton history={this.props.history} />
+                        </td>
+                      </tr>
+                    </thead>
                   </table>
                 </div>
               </div>
@@ -219,7 +229,7 @@ class Assets extends Component {
                   items={this.state.projects}
                   selectedItem={this.state.selectedProject}
                   onItemSelect={this.handleProjectSelect}
-                  style={{ marginTop: "5.2rem" }}
+                  style={{ marginTop: "0rem" }}
                 />
               ) : (
                 <></>

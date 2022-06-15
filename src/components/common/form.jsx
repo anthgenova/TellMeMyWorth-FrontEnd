@@ -38,7 +38,7 @@ class Form extends Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
-    console.log("Updated");
+    // console.log("Updated");
     this.doUpdate();
   };
 

@@ -83,7 +83,7 @@ class Home extends Component {
           </p>
           <p>
             {" "}
-            The next phases involve added in metaverse properties, art pieces,
+            The next phases involve adding in metaverse properties, art pieces,
             and tokens; so we can fully Tell You Your Worth!
           </p>
 

@@ -14,7 +14,8 @@ class AddrSearch extends Form {
 
   doSubmit = () => {
     // console.log("Submitted", this.props.history);
-    this.props.history.push("/loading/" + this.state.data.addr);
+    // this.props.history.push("/loading/" + this.state.data.addr);
+    this.props.history.push("/" + this.state.data.addr);
     // setTimeout(2500);
     // this.props.history.push("/" + this.state.data.addr);
     // console.log(this.props.loading);
