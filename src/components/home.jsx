@@ -93,6 +93,16 @@ class Home extends Component {
             Message us on Discord or email us at TellMeMyWorth@gmail.com to find
             out how!
           </p>
+          <p style={{ fontSize: 14 }}>
+            {" "}
+            *Disclaimer: Values presented are not meant to be a definitive
+            price. We cannot guarantee the prices displayed are the prices you
+            would recieve for a sale. This tool to use to determine an estimated
+            value of your wallet. We are still developing the site! We are
+            working first to allow you to view all your unique 1 of 1
+            collections. We plan to eventually display all possible assets in
+            your wallet, but this will take some time.
+          </p>
         </div>
       </div>
     );

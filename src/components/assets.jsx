@@ -8,6 +8,7 @@ import AddrSearch from "./addrSearch";
 import AddrUpdate from "./addrUpdate";
 import HomeButton from "./homeButton";
 import WalletNew from "./walletNew";
+import SearchBox from "./searchBox";
 import { paginate } from "../utils/paginate";
 import { getAssets, getTotalValue } from "../services/walletService";
 import { getProjects } from "../services/projectService";
@@ -24,6 +25,7 @@ class Assets extends Component {
     projects: [],
     pageSize: 10,
     currentPage: 1,
+    searchQuery: "",
     selectedProject: { name: "All Assets" },
     // totalValue: getTotalValue(),
     sortColumn: { path: "value", order: "desc" },
@@ -60,7 +62,15 @@ class Assets extends Component {
   };
 
   handleProjectSelect = (project) => {
-    this.setState({ selectedProject: project, currentPage: 1 });
+    this.setState({
+      selectedProject: project,
+      searchQuery: "",
+      currentPage: 1,
+    });
+  };
+
+  handleSearch = (query) => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
   };
 
   handleSort = (sortColumn) => {
@@ -73,13 +83,23 @@ class Assets extends Component {
       currentPage,
       sortColumn,
       selectedProject,
+      searchQuery,
       assets: allAssets,
     } = this.state;
 
-    const filtered =
-      selectedProject && selectedProject._id
-        ? allAssets.filter((m) => m.project._id === selectedProject._id)
-        : allAssets;
+    // const filtered =
+    //   selectedProject && selectedProject._id
+    //     ? allAssets.filter((m) => m.project._id === selectedProject._id)
+    //     : allAssets;
+
+    const walletAssetCount = allAssets.length;
+    let filtered = allAssets;
+    if (searchQuery)
+      filtered = allAssets.filter((m) =>
+        m.asset.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (selectedProject && selectedProject._id)
+      filtered = allAssets.filter((m) => m.project._id === selectedProject._id);
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -89,12 +109,18 @@ class Assets extends Component {
 
     const totalValue = filtered.reduce((a, b) => a + (b.value || 0), 0);
 
-    return { totalCount: filtered.length, data: assets, totalValue };
+    return {
+      totalCount: filtered.length,
+      data: assets,
+      totalValue,
+      walletAssetCount,
+    };
   };
 
   render() {
     const { length: count } = this.state.assets;
-    const { pageSize, currentPage, sortColumn, loading } = this.state;
+    const { pageSize, currentPage, sortColumn, loading, searchQuery } =
+      this.state;
 
     // if (loading) {
     //   // if your component doesn't have to wait for an async action, remove this block
@@ -103,7 +129,12 @@ class Assets extends Component {
 
     //if (count === 0) return <p>Sneaking through your wallet...</p>;
 
-    const { totalCount, data: assets, totalValue } = this.getPageData();
+    const {
+      totalCount,
+      data: assets,
+      totalValue,
+      walletAssetCount,
+    } = this.getPageData();
 
     return (
       // <WalletNew history={this.props.history} loading={loading} />
@@ -112,10 +143,15 @@ class Assets extends Component {
           <div className="row justify-content-center">
             {/* <AdsTop /> */}
             <div className="px-4 my-1 text-center">
-              {totalCount !== 0 ? (
+              {walletAssetCount !== 0 ? (
                 <h1>
-                  Your total value of {this.state.selectedProject.name} is{" "}
-                  {totalValue.toLocaleString("en-US")}
+                  Your total value of{" "}
+                  {searchQuery.length === 0 ? (
+                    this.state.selectedProject.name
+                  ) : (
+                    <>assets starting with "{searchQuery}"</>
+                  )}{" "}
+                  is {totalValue.toLocaleString("en-US")}
                   ₳!
                 </h1>
               ) : (
@@ -162,14 +198,20 @@ class Assets extends Component {
                       .replace("/", "")
                       .substring(10)}
                   </h7> */}
+                  <SearchBox value={searchQuery} onChange={this.handleSearch} />
                 </>
               ) : (
                 <h6>{this.props.location.pathname.replace("/", "")}</h6>
               )}
             </div>
-            <div className="col order-md-1">
+            <div
+              className="col order-md-1"
+              style={
+                isMobile ? { marginTop: "0rem" } : { marginTop: "1.25rem" }
+              }
+            >
               {/* <AddrSearch history={this.props.history} loading={loading} /> */}
-              {totalCount !== 0 ? (
+              {walletAssetCount !== 0 ? (
                 <>
                   <AssetsTable
                     assets={assets}
@@ -213,24 +255,39 @@ class Assets extends Component {
                     3. Still not working? Message us on Discord so we can help
                     you figure out how much you're worth.{" "}
                   </p>
-                  <p>
+                  <p style={{ fontSize: 14 }}>
                     {" "}
-                    *Disclaimer: We are still developing the site! We are
-                    working first to allow you to view all your unique 1 of 1
-                    collections. We plan to eventually display all possible
-                    assets in your wallet, but this will take some time.
+                    *Disclaimer: Values presented are not meant to be a
+                    definitive price. We cannot guarantee the prices displayed
+                    are the prices you would recieve for a sale. This tool to
+                    use to determine an estimated value of your wallet. We are
+                    still developing the site! We are working first to allow you
+                    to view all your unique 1 of 1 collections. We plan to
+                    eventually display all possible assets in your wallet, but
+                    this will take some time.
                   </p>
                 </>
               )}
             </div>
             <div className="col-md-2 order-md-2">
-              {totalCount !== 0 ? (
-                <ListGroup
-                  items={this.state.projects}
-                  selectedItem={this.state.selectedProject}
-                  onItemSelect={this.handleProjectSelect}
-                  style={{ marginTop: "0rem" }}
-                />
+              {walletAssetCount !== 0 ? (
+                <>
+                  {isMobile ? (
+                    <></>
+                  ) : (
+                    <SearchBox
+                      value={searchQuery}
+                      onChange={this.handleSearch}
+                    />
+                  )}
+
+                  <ListGroup
+                    items={this.state.projects}
+                    selectedItem={this.state.selectedProject}
+                    onItemSelect={this.handleProjectSelect}
+                    style={{ marginTop: "0rem" }}
+                  />
+                </>
               ) : (
                 <></>
               )}

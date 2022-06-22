@@ -6,7 +6,7 @@ class AssetsTable extends Component {
     { path: "optimized_source", label: "", type: "img", sortable: false },
     { path: "project.name", label: "Project", sortable: false },
     { path: "asset", label: "Asset", sortable: true },
-    { path: "bestTrait", label: "Best Trait", sortable: false },
+    { path: "valueBasedOn", label: "Based On", sortable: false },
     { path: "value", label: "Value ₳", sortable: true },
   ];
 
