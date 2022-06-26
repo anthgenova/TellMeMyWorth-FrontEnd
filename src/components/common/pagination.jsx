@@ -15,9 +15,9 @@ const Pagination = (props) => {
 
   return (
     <nav>
-      <ul className="d-flex justify-content-center">
+      <ul className="pagination">
         <li key={"firstPage"} className={"page-item"}>
-          <a className="page-link" onClick={() => onPageChange(1)}>
+          <a className="clickable page-link" onClick={() => onPageChange(1)}>
             First
           </a>
         </li>
@@ -26,13 +26,19 @@ const Pagination = (props) => {
             key={page}
             className={page === currentPage ? "page-item active" : "page-item"}
           >
-            <a className="page-link" onClick={() => onPageChange(page)}>
+            <a
+              className="clickable page-link"
+              onClick={() => onPageChange(page)}
+            >
               {page}
             </a>
           </li>
         ))}
         <li key={"lastPage"} className={"page-item"}>
-          <a className="page-link" onClick={() => onPageChange(pagesCount)}>
+          <a
+            className="clickable page-link"
+            onClick={() => onPageChange(pagesCount)}
+          >
             Last
           </a>
         </li>

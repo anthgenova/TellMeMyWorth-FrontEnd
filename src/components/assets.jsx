@@ -138,7 +138,7 @@ class Assets extends Component {
 
     return (
       // <WalletNew history={this.props.history} loading={loading} />
-      <div>
+      <div className="assetsPage">
         {loading === false ? (
           <div className="row justify-content-center">
             {/* <AdsTop /> */}
@@ -294,9 +294,11 @@ class Assets extends Component {
             </div>
           </div>
         ) : (
-          <p className="position-absolute top-50 start-50 translate-middle">
-            Sneaking through your wallet...
-          </p>
+          <div className="loading">
+            <p className="position-absolute top-50 start-50 translate-middle">
+              Sneaking through your wallet...
+            </p>
+          </div>
         )}
       </div>
     );

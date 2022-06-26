@@ -24,7 +24,7 @@ class TableHeader extends Component {
   render() {
     return (
       <thead>
-        <tr>
+        <tr className="tr">
           {React.Children.toArray(
             this.props.columns.map((column) => (
               <>
