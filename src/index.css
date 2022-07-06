@@ -11,8 +11,9 @@
   --minor-color: #6699cc;
 }
 
-html {
+html, body {
   height: 100%;
+  width: 100%;
   background: var(--primary-color) !important;
 
 }
@@ -174,10 +175,10 @@ a.link {
   /* color:#eee; */
   /* text-align: center;
   padding: 20rem 0 25rem; */
-  margin: 100%;
+  /* margin: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   /* object-fit: cover; */
   
 }
