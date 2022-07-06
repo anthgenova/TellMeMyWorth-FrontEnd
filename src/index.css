@@ -170,7 +170,7 @@ a.link {
     border: solid 1px var(--primary-color);
 }
 
-.loading {
+/*.loading {
   /* background: var(--primary-color) !important; */
   /* color:#eee; */
   /* text-align: center;
@@ -180,8 +180,8 @@ a.link {
   justify-content: center;
   align-items: center; */
   /* object-fit: cover; */
-  
-}
+  /*
+}*/
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
