@@ -1,5 +1,5 @@
 {
-    "apiUrl_prod": "http://api.tellmemyworth.com/api",
+    "apiUrl_prod": "https://api.tellmemyworth.com/api",
     "apiUrl_dev": "http://localhost:3000/api"
 }
 
