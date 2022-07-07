@@ -18,7 +18,7 @@ class Home extends Component {
         <div className="px-4 py-1 my-3 text-center">
           <h1>Welcome to TellMeMyWorth!</h1>
           <h6>
-            Please consider donating to $TellMeMyWorth to help keep us alive.
+            Please consider donating to $tellmemyworth to help keep us alive.
           </h6>
         </div>
 

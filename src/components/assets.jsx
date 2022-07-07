@@ -159,7 +159,7 @@ class Assets extends Component {
               )}
 
               <h6>
-                Please consider donating to $TellMeMyWorth to help keep us
+                Please consider donating to $tellmemyworth to help keep us
                 alive.
               </h6>
               <div
