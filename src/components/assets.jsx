@@ -157,11 +157,21 @@ class Assets extends Component {
               ) : (
                 <h3>First time here?</h3>
               )}
-
               <h6>
                 Please consider donating to $tellmemyworth to help keep us
                 alive.
-              </h6>
+              </h6>{" "}
+              <p>
+                Follow us on{" "}
+                <a
+                  href="https://twitter.com/TellMeMyWorth"
+                  target="_blank"
+                  className="link"
+                >
+                  Twitter
+                </a>{" "}
+                to keep up with the latest news!
+              </p>
               <div
                 className="row justify-content-center"
                 style={{ padding: "0rem 0rem 1.5rem 0rem" }}

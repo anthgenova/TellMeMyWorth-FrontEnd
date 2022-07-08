@@ -20,6 +20,17 @@ class Home extends Component {
           <h6>
             Please consider donating to $tellmemyworth to help keep us alive.
           </h6>
+          <h6>
+            Follow us on{" "}
+            <a
+              href="https://twitter.com/TellMeMyWorth"
+              target="_blank"
+              className="link"
+            >
+              Twitter
+            </a>{" "}
+            to keep up with the latest news!
+          </h6>
         </div>
 
         <div className="col">
