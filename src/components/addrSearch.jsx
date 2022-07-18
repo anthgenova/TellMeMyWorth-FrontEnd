@@ -30,7 +30,7 @@ class AddrSearch extends Form {
           {this.renderInput(
             "addr",
             "Address",
-            "Please enter your address starting with 'stake' or 'addr'..."
+            "Please enter your address starting with 'stake', 'addr', or your ADA Handle..."
           )}
           {this.renderButton("Search", "0.5rem 0.5rem 0rem 0rem")}
         </form>
