@@ -40,8 +40,8 @@ class Home extends Component {
         <div>
           <h2 className="px-4 py-1 my-3 text-center">How to Use</h2>
           <p>
-            Paste your staking (stake) or recieving (addr1) address into the
-            Search bar and click "Search".
+            Paste your staking address, recieving address, or ADA Handle into
+            the Search bar and click "Search".
           </p>
           <p>
             If this is your first time using us or your wallet's assets have
@@ -76,13 +76,11 @@ class Home extends Component {
             >
               cnftjungle.io
             </a>{" "}
-            and search for the project. Once there either filter Listings to JPG
-            Store and the trait we determined is its best, or from its project
-            page on CNFT.tools you can search its asset number and view its
-            Trait Floors.
+            and search for the project and filter by your nft's traits to see
+            their floors.
           </p>
 
-          <h2 className="px-4 py-1 my-3 text-center">
+          {/* <h2 className="px-4 py-1 my-3 text-center">
             We're Still Developing!
           </h2>
 
@@ -121,28 +119,34 @@ class Home extends Component {
               Discord
             </a>
             .
-          </p>
-          <p>
+          </p> */}
+          {/* <p>
             {" "}
             The next phases involve adding in metaverse properties and art
             pieces, so we can fully Tell You Your Worth!
-          </p>
+          </p> */}
 
           <h2 className="px-4 py-1 my-3 text-center">Want to Advertise?</h2>
           <p>
             {" "}
-            Message us on Discord or email us at TellMeMyWorth@gmail.com to find
-            out how!
+            Message us on{" "}
+            <a
+              href="https://discord.gg/K5HXetCHMU"
+              target="_blank"
+              className="link"
+            >
+              Discord
+            </a>{" "}
+            or email us at TellMeMyWorth@gmail.com to find out how!
           </p>
           <p style={{ fontSize: 14 }}>
             {" "}
             *Disclaimer: Values presented are not meant to be a definitive
             price. We cannot guarantee the prices displayed are the prices you
-            would recieve for a sale. This tool to use to determine an estimated
-            value of your wallet. We are still developing the site! We are
-            working first to allow you to view all your unique 1 of 1
-            collections and tokens. We plan to eventually display all possible
-            assets in your wallet, but this will take some time.
+            would recieve for a sale. This tool is used to determine an
+            estimated value of your wallet. We are still developing the site! We
+            plan to eventually display all possible assets in your wallet, but
+            this will take some time.
           </p>
         </div>
       </div>
