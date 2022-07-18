@@ -57,17 +57,24 @@ class Home extends Component {
 
           <p>
             Our technology determines your assets' values based on their best
-            trait found by determining the floor price of each trait on the most
-            used CNFT marketplace,{" "}
-            <a href="https://www.jpg.store/" target="_blank" className="link">
-              jpg.store
+            trait provided by{" "}
+            <a
+              href="https://www.cnftjungle.io/"
+              target="_blank"
+              className="link"
+            >
+              cnftjungle.io
             </a>
             .
           </p>
           <p>
             Want to double check our price determination? Head over to{" "}
-            <a href="https://cnft.tools/" target="_blank" className="link">
-              cnft.tools
+            <a
+              href="https://www.cnftjungle.io/"
+              target="_blank"
+              className="link"
+            >
+              cnftjungle.io
             </a>{" "}
             and search for the project. Once there either filter Listings to JPG
             Store and the trait we determined is its best, or from its project
@@ -107,7 +114,7 @@ class Home extends Component {
             to get your project added sooner or after the poll, please message
             us in our official{" "}
             <a
-              href="https://discord.gg/e2Yh7jux"
+              href="https://discord.gg/KXurjVTv"
               target="_blank"
               className="link"
             >

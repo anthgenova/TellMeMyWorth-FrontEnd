@@ -35,6 +35,12 @@ class Assets extends Component {
   async componentDidMount() {
     const { data } = await getProjects(this.props.location.pathname);
     const projects = [{ _id: "", name: "All Assets" }, ...data];
+    // console.log(projects.length);
+
+    const projectCount = projects.length;
+    if (projectCount > 10) {
+      this.setState({ pageSize: projectCount });
+    }
 
     const { data: assets } = await getAssets(this.props.location.pathname);
     this.setState({ assets, projects });
@@ -108,6 +114,7 @@ class Assets extends Component {
     // console.log(this.state.selectedProject);
 
     const totalValue = filtered.reduce((a, b) => a + (b.value || 0), 0);
+    // console.log(walletAssetCount);
 
     return {
       totalCount: filtered.length,
@@ -307,6 +314,11 @@ class Assets extends Component {
           <div className="loading">
             <p className="position-absolute top-50 start-50 translate-middle">
               Sneaking through your wallet...
+            </p>
+            <p className="position-absolute top-50 start-50 translate-middle">
+              <br></br>
+              <br></br>
+              <br></br>(Please allow 1 second per 10 assets in your wallet)
             </p>
           </div>
         )}
