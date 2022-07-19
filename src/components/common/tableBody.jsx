@@ -3,7 +3,8 @@ import _ from "lodash";
 
 class TableBody extends Component {
   renderCell = (item, column) => {
-    if (column.type === "img") {
+    if (column.type === "img" && item.optimized_source) {
+      // console.log(item.optimized_source);
       // console.log(_.get(item, column.path));
       return (
         <img

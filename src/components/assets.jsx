@@ -100,11 +100,19 @@ class Assets extends Component {
 
     const walletAssetCount = allAssets.length;
     let filtered = allAssets;
-    if (searchQuery)
-      filtered = allAssets.filter((m) =>
-        m.asset.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-    else if (selectedProject && selectedProject._id)
+    if (searchQuery) {
+      // try {
+      filtered = allAssets.filter((m) => {
+        if (m.asset) {
+          // console.log(
+          //   m.asset.toLowerCase().startsWith(searchQuery.toLowerCase())
+          // );
+          m.asset.toLowerCase().startsWith(searchQuery.toLowerCase());
+        }
+      });
+      // console.log(filtered);
+      // } catch {}
+    } else if (selectedProject && selectedProject._id)
       filtered = allAssets.filter((m) => m.project._id === selectedProject._id);
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
