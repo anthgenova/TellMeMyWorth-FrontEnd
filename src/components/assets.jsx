@@ -38,7 +38,9 @@ class Assets extends Component {
     // console.log(projects.length);
 
     const projectCount = projects.length;
-    if (projectCount > 10) {
+    if (projectCount > 20) {
+      this.setState({ pageSize: 20 });
+    } else if (projectCount > 10) {
       this.setState({ pageSize: projectCount });
     }
 
