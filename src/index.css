@@ -63,6 +63,13 @@ a.link {
   /* border-top-right-radius: 1rem; */
 }
 
+.form-check.form-switch {
+  background: #7472CF !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .table {
   background: #7472CF !important;
   /* background: var(--minor-color) !important; */

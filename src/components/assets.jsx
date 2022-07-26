@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { useState } from "react";
 import { withRouter } from "react-router";
+import { Checkbox } from "./common/checkbox";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import AssetsTable from "./assetsTable";
@@ -35,7 +37,6 @@ class Assets extends Component {
   async componentDidMount() {
     const { data } = await getProjects(this.props.location.pathname);
     const projects = [{ _id: "", name: "All Assets" }, ...data];
-    // console.log(projects.length);
 
     const projectCount = projects.length;
     if (projectCount > 20) {
@@ -45,6 +46,8 @@ class Assets extends Component {
     }
 
     const { data: assets } = await getAssets(this.props.location.pathname);
+    // console.log(assets);
+
     this.setState({ assets, projects });
     demoAsyncCall().then(() => this.setState({ loading: false }));
     // console.log("DidMount" + this.state.loading);
@@ -85,6 +88,63 @@ class Assets extends Component {
     this.setState({ sortColumn });
   };
 
+  handleToggle = (asset, data) => {
+    // console.log(data);
+
+    // console.log("hi");
+    // console.log(asset._id);
+    // console.log(this.state.assets[0]._id);
+    // console.log(this.state.assets);
+    // const [assets, setData] = useState(initialState);
+    // const index = this.state.assets.findIndex((p) => p._id === asset._id);
+    // // this.state.assets[index].value.setState(this.state.assets[index].floor);
+    // if (this.state.assets[index].valueShown === asset.value) {
+    //   this.state.assets[index].valueShown = asset.floor;
+    //   this.state.assets[index].basedOnShown = "Floor";
+    // } else {
+    //   this.state.assets[index].valueShown = asset.value;
+    //   this.state.assets[index].basedOnShown = asset.valueBasedOn;
+    // }
+    // console.log(this.state.assets[index].valueShown);
+    // console.log(this.state.assets[index].basedOnShown);
+
+    const newState = this.state.assets.map((obj) => {
+      if (obj._id === asset._id) {
+        // console.log("*************");
+        // console.log(obj._id);
+        // this.state.assets[index].value = asset.floor;
+        if (obj.valueShown === asset.value) {
+          data[asset._id] = "Floor";
+          return { ...obj, valueShown: asset.floor, basedOnShown: "Floor" };
+        } else {
+          delete data[asset._id];
+
+          return {
+            ...obj,
+            valueShown: asset.value,
+            basedOnShown: asset.valueBasedOn,
+          };
+        }
+
+        // return { ...obj, valueShown: 0 };
+      }
+      return obj;
+    });
+
+    this.setState({ assets: newState });
+    localStorage.setItem("myData", JSON.stringify(data));
+    // console.log(JSON.parse(localStorage.getItem("myData")));
+
+    // setAssets(newState);
+
+    // this.setState({assets assets[index].value});
+    // if (this.state.assets._id === asset._id) {
+    //   console.log(this.state.assets._id);
+    // }
+    // this.setState({ assets: asset });
+    // setIsChecked(!isChecked);
+  };
+
   getPageData = () => {
     const {
       pageSize,
@@ -99,6 +159,58 @@ class Assets extends Component {
     //   selectedProject && selectedProject._id
     //     ? allAssets.filter((m) => m.project._id === selectedProject._id)
     //     : allAssets;
+    // const [isChecked, setIsChecked] = useState(false);
+    let data = {};
+    // console.log(localStorage.getItem("myData"));
+    if (localStorage.getItem("myData")) {
+      data = JSON.parse(localStorage.getItem("myData"));
+      // data = JSON.parse(data);
+    } else {
+      // let data = {};
+    }
+
+    allAssets.forEach((asset) => {
+      try {
+        // const index = asset.findIndex((p) => p._id === asset._id);
+        if (data[asset._id]) {
+          asset["basedOnShown"] = data[asset._id];
+          asset["valueShown"] = asset.floor;
+          // console.log(asset.basedOnShown);
+        }
+      } catch {}
+
+      if (
+        asset.assetType === "Nft" &&
+        asset.valueBasedOn !== "Floor" &&
+        asset.valueBasedOn !== "No Data"
+      ) {
+        // console.log(asset.basedOnShown);
+        asset["valueToggle"] = (
+          <div className="form-check form-switch">
+            {asset.basedOnShown === "Floor" ? (
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckChecked"
+                onChange={() => this.handleToggle(asset, data)}
+                checked
+              />
+            ) : (
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckChecked"
+                onChange={() => this.handleToggle(asset, data)}
+                // checked
+              />
+            )}
+            {/* <label class="form-check-label" for="flexSwitchCheckChecked">
+            Checked switch checkbox input
+          </label> */}
+          </div>
+        );
+      }
+    });
 
     const walletAssetCount = allAssets.length;
     let filtered = allAssets;
@@ -123,7 +235,10 @@ class Assets extends Component {
 
     // console.log(this.state.selectedProject);
 
-    const totalValue = filtered.reduce((a, b) => a + (b.value || 0), 0);
+    const totalValue = filtered.reduce(
+      (a, b) => a + (b.valueShown || b.value || 0),
+      0
+    );
     // console.log(walletAssetCount);
 
     return {
@@ -145,7 +260,6 @@ class Assets extends Component {
     // }
 
     //if (count === 0) return <p>Sneaking through your wallet...</p>;
-
     const {
       totalCount,
       data: assets,

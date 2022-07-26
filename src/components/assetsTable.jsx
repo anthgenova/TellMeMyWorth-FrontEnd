@@ -6,8 +6,11 @@ class AssetsTable extends Component {
     { path: "optimized_source", label: "", type: "img", sortable: false },
     { path: "project.name", label: "Project", sortable: false },
     { path: "asset", label: "Asset", sortable: true },
-    { path: "valueBasedOn", label: "Based On", sortable: false },
-    { path: "value", label: "Value ₳", sortable: true },
+    // { path: "valueBasedOn", label: "Based On", sortable: false },
+    // { path: "value", label: "Value ₳", sortable: true },
+    { path: "basedOnShown", label: "Based On", sortable: false },
+    { path: "valueShown", label: "Value ₳", sortable: true },
+    { path: "valueToggle", label: "Trait | Floor", sortable: false },
   ];
 
   render() {
