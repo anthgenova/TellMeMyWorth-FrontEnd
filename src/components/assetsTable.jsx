@@ -9,8 +9,10 @@ class AssetsTable extends Component {
     // { path: "valueBasedOn", label: "Based On", sortable: false },
     // { path: "value", label: "Value ₳", sortable: true },
     { path: "basedOnShown", label: "Based On", sortable: false },
-    { path: "valueShown", label: "Value ₳", sortable: true },
+    // { path: "valueShown", label: "Value ₳", sortable: true },
+    { path: "valueShownVariable", label: "Value ₳", sortable: true },
     { path: "valueToggle", label: "Trait | Floor", sortable: false },
+    { path: "customToggle", label: "Custom", sortable: false },
   ];
 
   render() {

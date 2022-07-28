@@ -88,7 +88,7 @@ class Assets extends Component {
     this.setState({ sortColumn });
   };
 
-  handleToggle = (asset, data) => {
+  handleTraitFloorToggle = (asset, data) => {
     // console.log(data);
 
     // console.log("hi");
@@ -130,6 +130,7 @@ class Assets extends Component {
       }
       return obj;
     });
+    // console.log(data[asset._id]);
 
     this.setState({ assets: newState });
     localStorage.setItem("myData", JSON.stringify(data));
@@ -143,6 +144,96 @@ class Assets extends Component {
     // }
     // this.setState({ assets: asset });
     // setIsChecked(!isChecked);
+  };
+
+  handleCustomToggle = (asset, data) => {
+    // console.log(data);
+
+    const newState = this.state.assets.map((obj) => {
+      if (obj._id === asset._id) {
+        // console.log("*************");
+        // console.log(obj._id);
+        // this.state.assets[index].value = asset.floor;
+        // console.log(obj.valueShown);
+        // console.log(Object.keys(data[asset._id])[0]);
+        if (data[asset._id] && Object.keys(data[asset._id])[0] === "Custom") {
+          delete data[asset._id];
+          return {
+            ...obj,
+            valueShown: asset.value,
+            basedOnShown: asset.valueBasedOn,
+          };
+        } else if (
+          obj.valueShown === asset.value ||
+          data[asset._id] === "Floor"
+        ) {
+          // prompt("Hi", "hi");
+          data[asset._id] = { Custom: asset.value };
+          return {
+            ...obj,
+            valueShown: data[asset._id]["Custom"],
+            basedOnShown: "Custom",
+          };
+        } else {
+          delete data[asset._id];
+
+          return {
+            ...obj,
+            valueShown: asset.value,
+            basedOnShown: asset.valueBasedOn,
+          };
+        }
+
+        // return { ...obj, valueShown: 0 };
+      }
+      return obj;
+    });
+    // console.log(data[asset._id]);
+
+    this.setState({ assets: newState });
+    localStorage.setItem("myData", JSON.stringify(data));
+  };
+
+  handleCustomInput = (asset, data, valueInputed) => {
+    // console.log(asset);
+    // console.log(data);
+    // console.log(valueInputed);
+    const newState = this.state.assets.map((obj) => {
+      if (obj._id === asset._id) {
+        // console.log("*************");
+        // console.log(obj._id);
+        // this.state.assets[index].value = asset.floor;
+        // console.log(obj.valueShown);
+        // console.log(asset.value);
+        if (
+          obj.valueShown === asset.value ||
+          Object.keys(data[asset._id])[0] === "Custom"
+        ) {
+          // prompt("Hi", "hi");
+          data[asset._id] = { Custom: parseInt(valueInputed) };
+          return {
+            ...obj,
+            valueShown: data[asset._id]["Custom"],
+            basedOnShown: "Custom",
+          };
+        } else {
+          // delete data[asset._id];
+
+          return {
+            ...obj,
+            valueShown: asset.value,
+            basedOnShown: asset.valueBasedOn,
+          };
+        }
+
+        // return { ...obj, valueShown: 0 };
+      }
+      return obj;
+    });
+    // console.log(data[asset._id]);
+
+    this.setState({ assets: newState });
+    localStorage.setItem("myData", JSON.stringify(data));
   };
 
   getPageData = () => {
@@ -168,31 +259,31 @@ class Assets extends Component {
     } else {
       // let data = {};
     }
+    // console.log(data);
 
     allAssets.forEach((asset) => {
       try {
         // const index = asset.findIndex((p) => p._id === asset._id);
-        if (data[asset._id]) {
+        if (data[asset._id] === "Floor") {
           asset["basedOnShown"] = data[asset._id];
           asset["valueShown"] = asset.floor;
           // console.log(asset.basedOnShown);
+        } else if (Object.keys(data[asset._id])[0] === "Custom") {
+          asset["basedOnShown"] = "Custom";
+          asset["valueShown"] = data[asset._id]["Custom"];
         }
+        // console.log(Object.keys(data[asset._id]));
       } catch {}
 
-      if (
-        asset.assetType === "Nft" &&
-        asset.valueBasedOn !== "Floor" &&
-        asset.valueBasedOn !== "No Data"
-      ) {
-        // console.log(asset.basedOnShown);
-        asset["valueToggle"] = (
+      if (asset.assetType === "Nft") {
+        asset["customToggle"] = (
           <div className="form-check form-switch">
-            {asset.basedOnShown === "Floor" ? (
+            {asset.basedOnShown === "Custom" ? (
               <input
                 className="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckChecked"
-                onChange={() => this.handleToggle(asset, data)}
+                onChange={() => this.handleCustomToggle(asset, data)}
                 checked
               />
             ) : (
@@ -200,15 +291,82 @@ class Assets extends Component {
                 className="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckChecked"
-                onChange={() => this.handleToggle(asset, data)}
+                onChange={() => this.handleCustomToggle(asset, data)}
+                // data-toggle="modal"
                 // checked
               />
             )}
             {/* <label class="form-check-label" for="flexSwitchCheckChecked">
-            Checked switch checkbox input
-          </label> */}
+              Checked switch checkbox input
+            </label> */}
           </div>
         );
+        if (
+          asset.assetType === "Nft" &&
+          asset.valueBasedOn !== "Floor" &&
+          asset.valueBasedOn !== "No Data"
+        ) {
+          // if (
+          //   asset.assetType === "Nft" &&
+          //   asset.valueBasedOn !== "Floor" &&
+          //   asset.valueBasedOn !== "No Data"
+          // ) {
+          // console.log(asset.basedOnShown);
+          asset["valueToggle"] = (
+            <div className="form-check form-switch">
+              {asset.basedOnShown === "Custom" ? (
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDisabled"
+                  // onChange={() => this.handleTraitFloorToggle(asset, data)}
+                  disabled
+                  checked={false}
+                />
+              ) : asset.basedOnShown === "Floor" ? (
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckChecked"
+                  onChange={() => this.handleTraitFloorToggle(asset, data)}
+                  checked
+                />
+              ) : (
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckChecked"
+                  onChange={() => this.handleTraitFloorToggle(asset, data)}
+                  checked={false}
+                />
+              )}
+              {/* <label class="form-check-label" for="flexSwitchCheckChecked">
+            Checked switch checkbox input
+          </label> */}
+            </div>
+          );
+        }
+      }
+      if (asset.basedOnShown === "Custom") {
+        asset["valueShownVariable"] = (
+          <div>
+            <input
+              type="number"
+              className="form-control"
+              id="customAssetValue"
+              placeholder="# > 0"
+              size="sm"
+              value={data[asset._id]["Custom"]}
+              onChange={(e) =>
+                this.handleCustomInput(asset, data, e.target.value)
+              }
+            ></input>
+          </div>
+        );
+        // asset["valueShown"] = asset["valueShownVariable"];
+        // console.log(asset["valueShownVariable"].value);
+      } else {
+        asset["valueShownVariable"] = asset["valueShown"];
       }
     });
 
@@ -438,11 +596,11 @@ class Assets extends Component {
             <p className="position-absolute top-50 start-50 translate-middle">
               Sneaking through your wallet...
             </p>
-            <p className="position-absolute top-50 start-50 translate-middle">
+            {/* <p className="position-absolute top-50 start-50 translate-middle">
               <br></br>
               <br></br>
               <br></br>(Please allow 1 second per 10 assets in your wallet)
-            </p>
+            </p> */}
           </div>
         )}
       </div>
