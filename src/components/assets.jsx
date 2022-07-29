@@ -16,6 +16,7 @@ import { getAssets, getTotalValue } from "../services/walletService";
 import { getProjects } from "../services/projectService";
 import _ from "lodash";
 import { isMobile } from "react-device-detect";
+import { Link, NavLink } from "react-router-dom";
 
 function demoAsyncCall() {
   return new Promise((resolve) => setTimeout(() => resolve(), 3000));
@@ -469,10 +470,22 @@ class Assets extends Component {
                   <table className="pt-4">
                     <thead>
                       <tr>
-                        <td className="px-4">
+                        <td className="px-2">
                           <AddrUpdate location={this.props.location.pathname} />
                         </td>
-                        <td className="px-4">
+                        <td className="px-2">
+                          {" "}
+                          <Link to="/floorSweeper">
+                            <button
+                              //   onClick={this.state.history.push("/")}
+                              className="btn btn-primary"
+                              style={{ margin: "0rem 0rem 0rem 0rem" }}
+                            >
+                              Floor Sweeper
+                            </button>
+                          </Link>
+                        </td>{" "}
+                        <td className="px-2">
                           <HomeButton history={this.props.history} />
                         </td>
                       </tr>

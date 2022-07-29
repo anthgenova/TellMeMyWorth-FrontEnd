@@ -9,6 +9,7 @@ import { paginate } from "../utils/paginate";
 import { getAssets, getTotalValue } from "../services/walletService";
 import { getProjects } from "../services/projectService";
 import _ from "lodash";
+import { Link, NavLink } from "react-router-dom";
 
 class Home extends Component {
   render() {
@@ -31,8 +32,32 @@ class Home extends Component {
             </a>{" "}
             to keep up with the latest news!
           </h6>
+          <div
+            className="row justify-content-center"
+            style={{ padding: "0rem 0rem 0rem 0rem" }}
+          >
+            <div className="col-auto pt-2">
+              <table className="pt-4">
+                <thead>
+                  <tr>
+                    <td className="px-2">
+                      {" "}
+                      <Link to="/floorSweeper">
+                        <button
+                          //   onClick={this.state.history.push("/")}
+                          className="btn btn-primary"
+                          style={{ margin: "0rem 0rem 0rem 0rem" }}
+                        >
+                          Floor Sweeper
+                        </button>
+                      </Link>
+                    </td>{" "}
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
         </div>
-
         <div className="col">
           <AddrSearch history={this.props.history} />
           {/* <AddrUpdate /> */}
