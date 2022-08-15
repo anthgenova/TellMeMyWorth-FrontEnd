@@ -74,7 +74,7 @@ class FloorSweeperForm extends Form {
         .toString("base32");
       //   assetData["optimized_source"] = "https://" + cid + ".ipfs.infura-ipfs.io";
 
-      sweep.optimized_source = "https://" + cid + ".ipfs.infura-ipfs.io";
+      sweep.optimized_source = "https://gateway.ipfs.io/ipfs/" + cid;
     });
     this.setState({ sweeps });
 
